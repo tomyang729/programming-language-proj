@@ -5,18 +5,18 @@ Team Member Names (alph order of last name):
 4. Tom Yang
 
 Team Member Student IDs:
-1. 
+1. 34797134
 2. 34893140
 3. 45021136
 4. 14917141
 
 Team Member ugrad.cs.ubc.ca Logins:
-1.
+1. y3f0b
 2. f4a0b
 3. y7x9a
 4. p7w9a
 
-Initial level commitment (80%, 90%, or 100%):
+Initial level commitment (80%, 90%, or 100%): 90%
 
 Tutorial time that at least one and ideally all members will guarantee to attend
 each week: T1A Mon 2:00 - 3:00 p.m.
