@@ -1,8 +1,20 @@
-Team Member Names:
+Team Member Names (alph order of last name):
+1. Trent Jeffery
+2. Ziyang Jin
+3. Victoria Wang
+4. Tom Yang
 
 Team Member Student IDs:
+1. 
+2.
+3. 45021136
+4.
 
 Team Member ugrad.cs.ubc.ca Logins:
+1.
+2.
+3. y7x9a
+4.
 
 Initial level commitment (80%, 90%, or 100%):
 
