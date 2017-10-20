@@ -26,8 +26,8 @@ to meet (ideally face-to-face): Mon 5-7 pm Wed 5-6 pm
 
 Three one-sentence ideas the team might pursue for the project:
 
-1. 
+1. Domain specific language for music notation, OR Parsing source code (of some programming language) into an AST for music notation, effectively generating music from an arbitrary progarm (and maybe use a music library to play it)
 
-2. 
+2. Programming language with (strict) natural-language like syntax, so code reads like English, OR a different human language version of an existing programming language, for example Chinese java that has Chinese keywords, but parses to standard java
 
-3.
+3. Static analysis for interesting features of Rust (possibly syntax highlighting, either from scratch or adding onto an existing onpen-source syntax highlighting) or Prolog
