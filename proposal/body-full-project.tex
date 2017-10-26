@@ -1,0 +1,16 @@
+\section{How it could be a full 100\% project}
+We intend to design a Domain-Specific Language extending the ABC music notation language. ABC is similar in power and purpose to LaTeX: it allows a user to hand-type a document that represents a piece of sheet music, and can be compiled to a PDF or played aloud using appropriate software. Our language, ABCD, will enhance ABC with common programming features such as identifiers and functions, empowering users to programmatically modify existing ABC documents and generate new music. 
+	A full implementation of the language would involve:
+
+An EBNF defining concrete syntax found in ABCD that are not in ABC (and possibly including the concrete syntax for ABC)
+An ABCD parser
+An abstract syntax implementation
+Evaluation implementation:
+A compiler to produce ABC files from the ABCD abstract syntax OR
+An interpreter to run ABCD programs, which have ABC files as input and output [deprecated]
+
+	ABCD should have native support for using ABC files as input to ABCD programs, allowing users to easily modify existing ABC scores. There are two general ways we can imagine using ABCD: writing scripts that compile into ABC files after modification or creation, or writing programs that may accept ABC files as input and output modified or generated ABC files. By outputting ABC files, our users can leverage existing software that works with ABC, including music players and pdf compilers.
+	For the scripting approach, an ABCD file may contain definitions of identifiers and functions as well as ABC notation. When compiled/evaluated, functions will modify, add, or remove ABC code in the script, and the script will evaluate to one or more ABC documents.
+	For the programming approach, an ABCD file may contain definitions of identifiers and functions, as well as a main program. The program can optionally take one or more ABC files (or something else) as input, create and modify ABC code during its evaluation, and optionally output one or more ABC files. We may wish to consider modifying files in-place as well. It is worth noting that this form of ABCD program is not a document containing a ?tune? like an ABC file does, and trying to compile it to an ABC document is not meaningful. We can think of the AST as the final, target form of an ABCD program, where a script would ultimately be evaluated to an ABC file. We can think of an ABCD program as a composer that creates new tunes or as an editor or remixer who transforms existing tunes. From a programmer?s lens, we can view an ABCD script as akin to a LaTeX document or HTML file, and an ABCD program more like a C program we might write for the unix command line, a pipeline that performs a transformation on data files or strings.
+	We would likely write our parser interpreter/compiler in python to harness its string processing capabilities, as ABC has a plain-text format where characters often need to be considered individually.
+	For a final project, we would likely also write a small ABCD program to demonstrate a possible use case for ABCD and showcase some of its capabilities. This would likely be a program that applies some transposition, addition of harmonies to certain notes, and some rhythm changes, and we would demonstrate by applying the program to a small ABC tune and playing the result or printing it as a pdf.
