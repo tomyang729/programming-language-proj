@@ -1,4 +1,7 @@
 *.log
 *.aux
 *.out
+*.synctex.gz
 .DS_Store
+*-converted-to.pdf
+comment.cut
