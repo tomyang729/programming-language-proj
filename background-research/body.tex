@@ -20,7 +20,7 @@ aaa
 
 \subsection{Overtone}
 
-Overtone is an Open Source toolkit for designing synthesizers and collaborating with music. It provides:
+Overtone is an Open Source toolkit for designing synthesizers and collaborating with music. It provides\cite{Aaron16}:
 \begin{itemize}
 \item A Clojure API to the SuperCollider synthesis engine
 \item A growing library of musical functions (scales, chords, rhythms, arpeggiators, etc.)
@@ -30,7 +30,18 @@ Overtone is an Open Source toolkit for designing synthesizers and collaborating 
 \item Pre-cache - a system for locally caching external assets such as .wav files
 \item An API for querying and fetching sounds from http://freesound.org
 \item A global concurrent event stream
-\end{itemize}\cite{Aaron16}
+\end{itemize}
+
+Overtone's idea is about sound generation. "Let me answer from the synthesis perspective - which is one of my main interests. Learning to design new synthesisers is a pretty dark art, and most of the books/resources I found take a very theory-centric stance which I found to not be particularly useful." Said the author of Overtone, Sam Aaron.\cite{Aaron13}
+
+Another advantage of overtone is about collaborative programming, so people can write music together.
+
+From a language design perspective, Sam Aaron describes the design of Overtone as follows:
+\begin{itemize}
+\item Synths are trees of ugens. Ugens are standard Clojure functions and return data-structures which are understood by the macros demo and defsynth. You can pass arguments to the ugen functions to specify their behaviour.
+\item Synths are not ugens. Calling a ugen function returns a data structure which can be used in a synth design. Calling a synth as a function triggers (i.e. plays) that synth.
+\end{itemize}
+
 
 \section{Potential Project}
 
@@ -39,67 +50,6 @@ Overtone is an Open Source toolkit for designing synthesizers and collaborating 
 \subsection{Parse into AST}
 \subsection{Compiler}
 
-\section{Citations}
-
-Citations to articles~\cite{bowman:reasoning,
-clark:pct, braams:babel, herlihy:methodology},
-conference proceedings~\cite{clark:pct} or maybe
-books \cite{Lamport:LaTeX, salas:calculus} listed
-in the Bibliography section of your
-article will occur throughout the text of your article.
-You should use BibTeX to automatically produce this bibliography;
-you simply need to insert one of several citation commands with
-a key of the item cited in the proper location in
-the \texttt{.tex} file~\cite{Lamport:LaTeX}.
-The key is a short reference you invent to uniquely
-identify each work; in this sample document, the key is
-the first author's surname and a
-word from the title.  This identifying key is included
-with each item in the \texttt{.bib} file for your article.
-
-The details of the construction of the \texttt{.bib} file
-are beyond the scope of this sample document, but more
-information can be found in the \textit{Author's Guide},
-and exhaustive details in the \textit{\LaTeX\ User's
-Guide} by Lamport~\shortcite{Lamport:LaTeX}.
-
-This article shows only the plainest form
-of the citation command, using \texttt{{\char'134}cite}.
-
-Some examples.  A paginated journal article \cite{Ziya17}, an enumerated
-journal article \cite{Cohen07}, a reference to an entire issue \cite{JCohen96},
-a monograph (whole book) \cite{Kosiur01}, a monograph/whole book in a series (see 2a in spec. document)
-\cite{Harel79}, a divisible-book such as an anthology or compilation \cite{Editor00}
-followed by the same example, however we only output the series if the volume number is given
-\cite{Editor00a} (so Editor00a's series should NOT be present since it has no vol. no.),
-a chapter in a divisible book \cite{Spector90}, a chapter in a divisible book
-in a series \cite{Douglass98}, a multi-volume work as book \cite{Knuth97},
-an article in a proceedings (of a conference, symposium, workshop for example)
-(paginated proceedings article) \cite{Andler79}, a proceedings article
-with all possible elements \cite{Smith10}, an example of an enumerated
-proceedings article \cite{VanGundy07},
-an informally published work \cite{Harel78}, a doctoral dissertation \cite{Clarkson85},
-a master's thesis: \cite{anisi03}, an online document / world wide web
-resource \cite{Thornburg01, Ablamowicz07, Poker06}, a video game (Case 1) \cite{Obama08} and (Case 2) \cite{Novak03}
-and \cite{Lee05} and (Case 3) a patent \cite{JoeScientist001},
-work accepted for publication \cite{rous08}, 'YYYYb'-test for prolific author
-\cite{SaeediMEJ10} and \cite{SaeediJETC10}. Other cites might contain
-'duplicate' DOI and URLs (some SIAM articles) \cite{Kirschmer:2010:AEI:1958016.1958018}.
-Boris / Barbara Beeton: multi-volume works as books
-\cite{MR781536} and \cite{MR781537}.
-
-A couple of citations with DOIs: \cite{2004:ITE:1009386.1010128,
-  Kirschmer:2010:AEI:1958016.1958018}. 
-
-Online citations: \cite{TUGInstmem, Thornburg01, CTANacmart}.  
-
 \section{Conclusions}
+
 This paragraph will end the body of this sample document.
-Remember that you might still have Acknowledgments or
-Appendices; brief samples of these
-follow.  There is still the Bibliography to deal with; and
-we will make a disclaimer about that here: with the exception
-of the reference to the \LaTeX\ book, the citations in
-this paper are to articles which have nothing to
-do with the present subject and are used as
-examples only.
