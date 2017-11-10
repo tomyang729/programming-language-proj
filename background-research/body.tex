@@ -4,7 +4,7 @@ Music is one of the most beautiful and ancient languages humans have created. Wi
 
 Many works have been done to enable musicians to systematically and efficiently generate and modify scores. However, most existing programming tools are either insufficient or not convenient to use with ABC. Our group plans to design a domain specific language called ABCD that extends ABC with common programming language features such as variables, functions, conditionals and loops. Our goal is to allow users to efficiently modify an existing ABC file or create a new piece by writing scripts in ABCD that compiles to ABC.
 
-\section{Value/Importance/Impact}
+\section{Background and Significance}
 
 ABC music notation is a markup language for sheet music, designed to be comprehensible by both computers and humans. It uses letters, digits and symbols to represent various music features, such notes, meters, accents, etc., allowing users to type out tunes on a computer without using the special musical characters\cite{Walshaw11}.
 
@@ -12,7 +12,8 @@ ABC was originally invented for sharing a large amount of tunes in a small-size 
 
 Nonetheless, since ABC is originally designed for simple tunes, there are many limitations in handling complex music pieces, which make it difficult for musicians to represent certain features or apply certain changes to an existing piece. Some limitations are associated with the parser. The parser cannot tell from the data format what types of ABC extension of rarely-used features it may encounter, and there is no formal specification for the parser to know when the chain of elements would end\cite{Cuthbert14}. ABC cannot express many of the musical features. For instance, there is little support for nested tuples, bar numbering control, and grace notes positioningend\cite{Cuthbert14}. Only a subset of guitar chords have semantic meaning in ABC\cite{Chambers02}. There is no efficient search function to find multiple occurrences of a tune pattern or a chord. As a result, users cannot systematically change a note in the multiple occurrences of a particular chord. 
 
-In general, using a computer program to make music has the following significance. It is faster, more reusable, and less prone to mistakes if the algorithms in a musician's mind can be represented by computer algorithms. A music composer may use programs to realize imagined and novel music that's unperformable by humans or that requires an amount of calculations unthinkable without a computer. By defining different functions, one may enhance a composer or an instrumentalist's operations in many ways. Similarly, the goal of this project is to expand and empower ABC so that users can perform operations more effectively by programming in ABCD. 
+In general, using a computer program to make music has the following significance. It is faster, more reusable, and less prone to mistakes if the algorithms in a musician's mind can be represented by computer algorithms. A music composer may use programs to realize imagined and novel music that’s unperformable by humans or that requires an amount of calculations unthinkable without a computer. By defining different functions, one may enhance a composer or an instrumentalist's operations in many ways\cite{Dobrian88}. Similarly, the motivation of this project is to expand and empower ABC so that users can perform operations more effectively by programming in ABCD. An example would be to add a notes to multiple occurrences of a tune pattern at the same time.  Since ABCD would eventually be compiled into ABC, it is not our intention to resolve the limitations related to the design of the ABC language itself, such as changing the parser, or add new symbols in ABC so that it can represent more chords. 
+ 
 
 
 \section{Similar work}
@@ -68,11 +69,27 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 \subsection{Features}
 	\subsubsection{Variables:}
 	\subsubsection{Functions:}
+	Functions are a basic component of a programming language for performing a specific task. ABCD would support users to write functions such as (but not limited to) the following:
+
+	- A function that takes a temperament and change it to a different temperament.
+
+ 	- A function that takes a whole music score and output the bar numbers along with the piece.
+ 	
+	- A function that takes a note "n" and a chord "c", and randomly generate another note "n2" according to the "c", to harmonize "n".
+	  It may also support first-class functions. For instance, if a user wishes to change all 3/4 bars containing a certain note pattern to 4/4 by adding a rest to the end, there needs to be a search function which takes a function (a conditional in this case) as its predicate or search criterion. 
+
 	\subsubsection{Loops:}
+	All high-level programming languages provide different forms of loop for the purpose of executing one or more statements up to a desired number of times. In the domain of music, it would be useful for performing search, systematic insertion, modification, and generation of music. 
+
+	Imagine a musician is trying to perform the following operation: search for all occurrences of tune "GFERE2" and return their bar numbers. One can easily use a loop to iterate through all the bars or movements (depending on what the variable is) of a piece. This operation may be useful when a musician needs to change a note in some occurrences of a same pattern, but she has to examine the context of those occurrences first. One may think "Ctrl+F" would simply do the job, but ironically, it's not even supported in the most popular ABC editor\cite{SlashdotMedia17}.  
+
+	Another example is to generate a sequence of semi-tone of length 30. Instead of manually typing 30 notes, one can simply use loop to generate a scale by increasing the key by half in each iteration.
+
 	\subsubsection{Conditions:}
 		
 	\subsubsection{Import Statement:}
 \subsection{Concrete Syntax}
+We will design concrete syntax for ABCD to support the following features: variables, conditionals functions, loops, and import statements.
 \subsection{Parse into AST}
 
 After some research, we have found a few implmentations of parsing ABC. Sergi Mansilla has implemented an ABC parser in JavaScript, which parses the ABC notation to a JSON object\cite{Mansilla12}. Remo Dentato has developed a C library to parse the ABC notation\cite{Dentato09}, however, the source code can no longer be found on the website and the usage description is quite complicated. However, on Dentato's website, it offers some high-level design graph of the scanner and documentation on tokens. Hans H\"{o}glund has implemented a parser in Haskell\cite{Hoglund15}. H\"{o}glund's implmentation has a few limitations such as do not support volatile features, text strings, and macros. abc4j is a Java library that provides API to handle ABC music notation using Java. The source code can be downloaded on \url{https://code.google.com/archive/p/abc4j/source}. However, it only supports the v1.6 standard of ABC (the current version is v2.1). There are many other people who tried to implment parser for ABC but failed or stopped their project.
