@@ -77,12 +77,14 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 	\subsubsection{Functions:}
 	Functions are a basic component of a programming language for performing a specific task. ABCD would support users to write functions such as (but not limited to) the following:
 
-	- A function that takes a temperament and change it to a different temperament.
+	- A function that takes a tempo and change it to a different tempo.
 
  	- A function that takes a whole music score and output the bar numbers along with the piece.
  	
 	- A function that takes a note "n" and a chord "c", and randomly generate another note "n2" according to the "c", to harmonize "n".
 	  It may also support first-class functions. For instance, if a user wishes to change all 3/4 bars containing a certain note pattern to 4/4 by adding a rest to the end, there needs to be a search function which takes a function (a conditional in this case) as its predicate or search criterion. 
+
+	 In addition, functions defer evaluation and abstract over arguments. Users can input a tune pattern to a function but wait for a bar number from another function, so that they can modify the tune pattern in that bar number alone.  
 
 	\subsubsection{Loops:}
 	All high-level programming languages provide different forms of loop for the purpose of executing one or more statements up to a desired number of times. In the domain of music, it would be useful for performing search, systematic insertion, modification, and generation of music. 
@@ -172,6 +174,8 @@ An ABCD file does not have to contain tunes; it may optionally contain only defi
 ABCD files will be compiled to ABC files. This will allow us to leverage the many existing software programs that support abc (http://abcnotation.com/software). These software programs include music players, pdf writers, and more.
 
 The compilation step will include parsing and interpretation of the ABCD file. ABC code found in the header and body will be unchanged in the resultant ABC file. Parsing and interpretation will evaluate all ABCD definitions and expressions. Each expression found in the header or body will be replaced with the result of its evaluation in the ABC output file. This allows the creation and use of functions that are designed to be called inline in the body to expand into music code. It also allows variables to be mutated partway through the body, and its modified value used for the rest of the tune. For example, a variable containing a C major triad (C E G) may be used in the beginning of a song, but mutated so that after the bridge, it has a major 7th (B) added, giving the modified chord wherever that variable is used for the rest fof the song. An ABCD file with no tunes will not produce any file when compiled.
+
+\section{Limitations}
 
 
 \section{Conclusions}
