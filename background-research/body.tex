@@ -77,6 +77,58 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 
 After some research, we have found a few implmentations of parsing ABC. Sergi Mansilla has implemented an ABC parser in JavaScript, which parses the ABC notation to a JSON object\cite{Mansilla12}. Remo Dentato has developed a C library to parse the ABC notation\cite{Dentato09}, however, the source code can no longer be found on the website and the usage description is quite complicated. However, on Dentato's website, it offers some high-level design graph of the scanner and documentation on tokens. Hans H\"{o}glund has implemented a parser in Haskell\cite{Hoglund15}. H\"{o}glund's implmentation has a few limitations such as do not support volatile features, text strings, and macros. abc4j is a Java library that provides API to handle ABC music notation using Java. The source code can be downloaded on \url{https://code.google.com/archive/p/abc4j/source}. However, it only supports the v1.6 standard of ABC (the current version is v2.1). There are many other people who tried to implment parser for ABC but failed or stopped their project.
 
+Mansilla's implmentation seems to be the easiest one to comprehend and can be adopted effortlessly if we implment ABCD language in JavaScript. The parser is based on PEG.js(parsing expression grammar), a simple parser generator for JavaScript that produces fast parsers with error reporting\cite{Ryuu17}. It integrates both lexical and syntactical analysis. The parsing expression grammar formalism is described to be more powerful than traditional LL(k) and LR(k) parsers.
+
+In order to build a prototype, we think of a simple implementation in Python that only parses a subset of ABC notation(bars, title, etc.), because Python is good for its string manipulation capabilitites. In our full project, we plan to use a parser generator to completetly contain the whole ABC language specification. 
+
+For example, for the following ABC code.
+\begin{verbatim}
+X:1
+T:Notes
+M:C
+L:1/4
+K:C
+C, D, E, F,|G, A, B, C|D E F G|A B c d|e f g a|b c' d' e'|f' g' a' b'|]
+\end{verbatim}
+
+We will parse it to an AST like this:
+\begin{verbatim}
+{
+	id: 1,
+	title: "Notes",
+	meter: "C",
+	length: "1/4",
+	key: "C",
+	tune: [ // tune is an array of bars
+	    [{ note: "C",
+	       length: 1},
+	     { note: "D",
+	       length: 1},
+	     { note: "E",
+	       length: 1},
+	     { note: "F",
+	       length: 1},],
+	    [{ note: "G",
+	       length: 1},
+	     { note: "A",
+	       length: 1},
+	     { note: "B",
+	       length: 1},
+	     { note: "C",
+	       length: 1},],
+	       ...
+	    [{ note: "f'",
+	       length: 1},
+	     { note: "g'",
+	       length: 1},
+	     { note: "a'",
+	       length: 1},
+	     { note: "b'",
+	       length: 1},],
+	]
+}
+\end{verbatim}
+
 \subsection{Compiler}
 
 \section{Conclusions}
