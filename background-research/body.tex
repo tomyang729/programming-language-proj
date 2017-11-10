@@ -42,6 +42,9 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 \subsection{Features}
 \subsection{Concrete Syntax}
 \subsection{Parse into AST}
+
+After some research, we have found a few implmentations of parsing ABC. Sergi Mansilla has implemented an ABC parser in JavaScript, which parses the ABC notation to a JSON object\cite{Mansilla12}. Remo Dentato has developed a C library to parse the ABC notation\cite{Dentato09}, however, the source code can no longer be found on the website and the usage description is quite complicated. However, on Dentato's website, it offers some high-level design graph of the scanner and documentation on tokens. Hans H\"{o}glund has implemented a parser in Haskell\cite{Hoglund15}. H\"{o}glund's implmentation has a few limitations such as do not support volatile features, text strings, and macros. abc4j is a Java library that provides API to handle ABC music notation using Java. The source code can be downloaded on \url{https://code.google.com/archive/p/abc4j/source}. However, it only supports the v1.6 standard of ABC (the current version is v2.1). There are many other people who tried to implment parser for ABC but failed or stopped their project.
+
 \subsection{Compiler}
 
 \section{Conclusions}
