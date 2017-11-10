@@ -176,8 +176,13 @@ ABCD files will be compiled to ABC files. This will allow us to leverage the man
 The compilation step will include parsing and interpretation of the ABCD file. ABC code found in the header and body will be unchanged in the resultant ABC file. Parsing and interpretation will evaluate all ABCD definitions and expressions. Each expression found in the header or body will be replaced with the result of its evaluation in the ABC output file. This allows the creation and use of functions that are designed to be called inline in the body to expand into music code. It also allows variables to be mutated partway through the body, and its modified value used for the rest of the tune. For example, a variable containing a C major triad (C E G) may be used in the beginning of a song, but mutated so that after the bridge, it has a major 7th (B) added, giving the modified chord wherever that variable is used for the rest fof the song. An ABCD file with no tunes will not produce any file when compiled.
 
 \section{Limitations}
+Using a computer to make music also has some limitations in general. The complexities of music are so numerous, undefined, interconnected, and is related to so many variables and random factors, that any reproduction would inevitably become compromised. There are many emotional nuances produced by real people that a synthesis procedure cannot simulate\cite{Dobrian88}.  Given the advantages and disadvantages of programming music, it comes down to an individual's goal whether to use a programming language to make music. 
 
+ABCD also has certain limitations, despite all the convenience. It does not support certain features, such as recursion. Users would need to either use loops to simulate recursions or define their own recursions. As mentioned before, ABCD is also limited to the capacity of ABC since it compiles to ABC. It offers expedient operations on ABC but cannot provide extra features beyond ABC.
 
 \section{Conclusions}
+In summary, ABCD is designed to enhance ABC with features including variables, functions, conditionals, loops, and import statements. The motivation is to empower users to generate or modify a piece of music more efficiently than they would in ABC.  Future implementation is needed to fulfill all the desired goals.
+
+
 
 This paragraph will end the body of this sample document.
