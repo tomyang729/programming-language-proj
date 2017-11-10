@@ -1,6 +1,8 @@
 \section{Overview}
 
-aaa
+Music is one of the most beautiful and ancient languages humans have created. With the advancement of technology, many solutions have been designed to facilitate the creation and spread process of music. ABC is one of the most widely used music notation forms. Even though it has great features to help musicians generate formal music sheets from scratch, its nature of being a markup language has limited its capacity for effective modification.
+
+Many works have been done to enable musicians to systematically and efficiently generate and modify scores. However, most existing programming tools are either insufficient or not convenient to use with ABC. Our group plans to design a domain specific language called ABCD that extends ABC with common programming language features such as variables, functions, conditionals and loops. Our goal is to allow users to efficiently modify an existing ABC file or create a new piece by writing scripts in ABCD that compiles to ABC.
 
 \section{Value/Importance/Impact}
 
@@ -40,7 +42,7 @@ aaa
 			The Chuck has found a variety of applications in music research and music creation. First of all, it is able to turn computers into instruments. Chuck has powered two "computer music" orchestras, namely PLOrk (Princeton Laptop Orchesta) and SLOrk (Stanford Laptop Orchestra). Besides, Chuck has served as experimental platformfor on-the-fly machine learning for real-time musicinformation retrieval prototyping\cite{Wang15}. In addition, it has also been applied in the development of music mobile-apps like Ocarina and Smule\cite{Wang15}.
 	\subsubsection{How our language is different?}
 	
-		The success of Chuck demonstrates the significance of the role of programming language plays in music and audio produciton. Designing and applying programming lanuages in generating and modifying music is definitely a valuable task to do. And Chuck is a great example we can learn from when designing our own Domain Specific Language which is customized for ABC music notation. There are many language designs in Chuck that we can follow. For instance, we should definitely include primitive types such as int, float, and music specific types like duration, note etc. Moreover, having functions and common control structures like conditional statements and loops will also be helpful. With that being said, we will not copy all the features from Chuck into ABCD. What we will do differently is that ABCD will contain ABC related data types to natively support ABC notations. (...?) Besides, we will also (...?). 
+		The success of Chuck demonstrates the significance of the role of programming language plays in music and audio produciton. Designing and applying programming lanuages in generating and modifying music is definitely a valuable task to do. And Chuck is a great example we can learn from when designing our own Domain Specific Language which is customized for ABC music notation. There are many language designs in Chuck that we can follow. For instance, we should definitely include primitive types such as int, float, and music specific types like duration, note etc. Moreover, having functions and common control structures like conditional statements and loops will also be helpful. With that being said, we will not copy all the features from Chuck into ABCD. What we will do differently is that ABCD will contain ABC related data types to natively support ABC notations. Besides, we will also provide build-in SDK to systematically modify ABC files. 
 
 \subsection{Overtone}
 
@@ -64,6 +66,12 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 \section{Potential Project}
 
 \subsection{Features}
+	\subsubsection{Variables:}
+	\subsubsection{Functions:}
+	\subsubsection{Loops:}
+	\subsubsection{Conditions:}
+		
+	\subsubsection{Import Statement:}
 \subsection{Concrete Syntax}
 \subsection{Parse into AST}
 
