@@ -22,7 +22,11 @@ aaa
 
 \subsection{Alda}
 
-aaa
+Alda is a music programming language intended for live-coding and composing music using only a text editor. It has similar music code syntax to abc, with a goal of being understandable and usable by musicians with no programming experience (https://github.com/alda-lang/alda). Alda supports inline Clojure, a dialect of lisp (https://clojure.org/), giving it rich programming capabilities. It can be exported to MIDI (https://github.com/alda-lang/alda/issues/145), which can in turn be used to generate sheet music using software like MuseScore (https://musescore.org/en/handbook/midi-import). 
+
+
+Alda appears to satisfy most of the goals of ABCD. The only goal not addressed by Alda is abc interoperability (through either translation or inline use). Considering the significant size of the abc corpus and the large amount of software designed to work with abc, we believe it will be valuable to enable native programmatic modification and generation of abc through the ABCD domain specific language. As an alternative, Alda could be extended with features to import and export abc, but this will require abc users who want programming capabilities to learn a brand new language and use a longer pipeline, at least for modification (import abc file to Alda, modify it, and export to ABC).
+
 
 \subsection{Chuck}
 
@@ -68,6 +72,8 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 
 \subsection{Features}
 	\subsubsection{Variables:}
+	Most programming languages have some form of identifiers. ABCD will as well -- this allows us to easily refer to functions and values. In the case of ABCD, this may include small and large chunks of music code. ABCD will support variables rather than immutable values. Variables lend themselves to modifying existing music code, which is one of our use case goals for ABCD. They also provide a mechanism for applying repeated transformations to a piece of music code that may or may not occur contiguously in the file (and therefore in evaluation). Mutation using variables is a feature supported in most popular programming languages. Moreover, abc encodes a music score, which represents a sequence of notes to be played over time, and it is encoded for the most part in the same order as the notes. Similarly, mutation is driven by the flow of time. Applying a sequence of transformations to a variable is more obviously sequential than the nested function applications common in functional programming. As a result, a more imperative programming paradigm will be easier to reason about when interwoven with abc music code.
+
 	\subsubsection{Functions:}
 	Functions are a basic component of a programming language for performing a specific task. ABCD would support users to write functions such as (but not limited to) the following:
 
@@ -89,7 +95,16 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 		The conditional statment is an extremely powerful and important portion of a fully functional programming language. It enables the programmers to test a variable against a value and execute in one way or another. Thus, ABCD will include if-else statement in order to help end-users control the dynamic execution flow of their programs. Syntatically, we will follow the standard conditional statement syntax and its semantics. Namely, a 'if' key word followed by a condition statement, followed by a truth statement and an optional 'else' key word and a falsity statement. The programmers can also chain conditional statements by using the 'if else' key word.
 
 		As an example, a user may want to change the speed of a score, but only if the tone is D. A conditional statment will be handy here.
-	\subsubsection{Import Statement:}
+	\subsubsection{File Importing:}
+	In order to create modifications of existing ABC tunes, we need access to the code contained in the files that house those tunes. To that end, ABCD will support inclusion of files by name. Files can be imported into any part of a file, allowing the inclusion of that file’s whole contents. Files can also be imported into a variable. This allows the programmer to selectively keep parts of the file, such as the body of a tune, the header, or a block of music code. It also allows direct modification of this copy of the file’s contents. 
+	
+	As an example, a user may wish to change every instance of a chord in an ABC file. They can import the contents of that ABC file into a variable in a new ABCD file. They can define a “replace all” function that takes in 3 chunks of music code or text, replacing all instances of the second argument with the third in the first. The user can then call the replace all function, passing in the variable containing the source file, the chord to be replaced, and the replacement chord. The variable will now contain the new, modified version of the original ABC tune, which can then be modified further or added to the ABCD file body to be compiled to ABC.
+	Import statements will be useful for a second reason, seen in most other programming languages: including library files. It is likely that users will want to reuse functions they write, and possibly chunks of music code such as melodies or chord progressions. By defining functions and variables in library files, they will be easy to import and use in any other ABCD file. For example, the “replace all” function described above will be useful when editing any tune that requires something to be replaced multiple times.
+	
+	Importing an ABC file can be simple: include the whole text of the file. However, it may be worth allowing the header and body of a one-tune file to be imported into two separate variables. It would not be hard to write a function to do this, however, so this could be included in a standard library.
+	
+	In addition to a header and body, an ABCD file has definitions. Again, the ABCD could be included as a big block of text, but it may be more useful to treat definitions as separate from the body and header of an ABCD file when importing. This depends in part on whether definitions are interleaved with music code, which could affect how they are interpreted within the body of the file; or if they are defined up front in a separate definitions section.
+
 \subsection{Concrete Syntax}
 We will design concrete syntax for ABCD to support the following features: variables, conditionals functions, loops, and import statements.
 \subsection{Parse into AST}
@@ -150,6 +165,14 @@ We will parse it to an AST like this:
 \end{verbatim}
 
 \subsection{Compiler}
+An ABC file consists of an optional file header, followed by at least one ABC tune. A tune represents a song, and consists of a tune header with information about the whole tune, such as key, meter, and composer; and a body, which consists of actual music code. (http://abcnotation.com/wiki/abc:standard:v2.1) Just as all ABC code is valid ABCD, an ABC file is a valid ABCD file. An ABCD file can have all the same parts as an ABC file, plus optional definitions. These can be function definitions and variable definitions. Functions can be called anywhere in the header or body, as well as in a function or variable definition. Variables can be referenced or assigned in all the same places: header, body, function definitions, and variable definitions.
+	
+An ABCD file does not have to contain tunes; it may optionally contain only definitions. In this case, it serves as a library file to be included in other ABCD files, providing functions and music code for reuse.
+	
+ABCD files will be compiled to ABC files. This will allow us to leverage the many existing software programs that support abc (http://abcnotation.com/software). These software programs include music players, pdf writers, and more.
+
+The compilation step will include parsing and interpretation of the ABCD file. ABC code found in the header and body will be unchanged in the resultant ABC file. Parsing and interpretation will evaluate all ABCD definitions and expressions. Each expression found in the header or body will be replaced with the result of its evaluation in the ABC output file. This allows the creation and use of functions that are designed to be called inline in the body to expand into music code. It also allows variables to be mutated partway through the body, and its modified value used for the rest of the tune. For example, a variable containing a C major triad (C E G) may be used in the beginning of a song, but mutated so that after the bridge, it has a major 7th (B) added, giving the modified chord wherever that variable is used for the rest fof the song. An ABCD file with no tunes will not produce any file when compiled.
+
 
 \section{Conclusions}
 
