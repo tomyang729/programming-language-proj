@@ -16,7 +16,24 @@ aaa
 
 \subsection{Chuck}
 
-aaa
+	\subsubsection{What is it about?}
+
+	Chuck is a powerful programming language designed for real-time sound synthesis and music creation\cite{WangCook02}.  It has the following great features\cite{Wang08}:
+	\begin{itemize}
+	\item Strongly-timed: Chuck allows programmers to control and reason about time precisely and expressively. It is an extremely important feature in audio programming paradigm.
+	\item Deterministic concurrency model: Chuck is able to run multiple processes (shreds) in parallel in its virtual machine. Combined with time-based model, it empowers end-user programmers to have arbitrarily fine granularity and create complex audio synthesis programs. 
+	\item Dynamic control rates: Programmers can manipulate the control rates (the manner with which a shred advances its way through time\cite{Wang08}) as they want and the control rates can dynamically vary with time.
+	\item Live-coding:  Chuck allows programmers to modify the code on the fly without recompiling.
+	\end{itemize}
+
+	\subsubsection{What has it achieved?}
+		\paragraph{Language Design:}
+			Chuck is first released in 2003\cite{Wang15}. Since then, it has evolved into a very robust and complete audio programming language. It is static typing. Besides, the designer of Chuck has includes most of the modern language features in this languages. For example, it has primitive types such as int, float, void etc, reference types, variables, arrays, functions, control structures, and even object oriented features. Furthermore, since Chuck is a programming language specialized in music, it contains many special designs such as `time` and `dur` type for users to easily manipulate time, `unit generator` and `unit analyzer` functions that are convenient to modify big chunk of music.
+		\paragraph{Applications:}
+			The Chuck has found a variety of applications in music research and music creation. First of all, it is able to turn computers into instruments. Chuck has powered two "computer music" orchestras, namely PLOrk (Princeton Laptop Orchesta) and SLOrk (Stanford Laptop Orchestra). Besides, Chuck has served as experimental platformfor on-the-fly machine learning for real-time musicinformation retrieval prototyping\cite{Wang15}. In addition, it has also been applied in the development of music mobile-apps like Ocarina and Smule\cite{Wang15}.
+	\subsubsection{How our language is different?}
+	
+		The success of Chuck demonstrates the significance of the role of programming language plays in music and audio produciton. Designing and applying programming lanuages in generating and modifying music is definitely a valuable task to do. And Chuck is a great example we can learn from when designing our own Domain Specific Language which is customized for ABC music notation. There are many language designs in Chuck that we can follow. For instance, we should definitely include primitive types such as int, float, and music specific types like duration, note etc. Moreover, having functions and common control structures like conditional statements and loops will also be helpful. With that being said, we will not copy all the features from Chuck into ABCD. What we will do differently is that ABCD will contain ABC related data types to natively support ABC notations. (...?) Besides, we will also (...?). 
 
 \subsection{Overtone}
 
@@ -30,7 +47,7 @@ Overtone is an Open Source toolkit for designing synthesizers and collaborating 
 \item Pre-cache - a system for locally caching external assets such as .wav files
 \end{itemize}
 
-Overtone's idea is about sound generation. "Let me answer from the synthesis perspective - which is one of my main interests. Learning to design new synthesisers is a pretty dark art, and most of the books/resources I found take a very theory-centric stance which I found to not be particularly useful." Said the author of Overtone, Sam Aaron.\cite{Aaron13} The current design of ABCD is just let it compile to ABC, and let ABC deals with the sound generation part. The ultimate version of ABCD can be directly interpreted to play sound, so how Overtone hooks up with SuperCollider can be case-studied for our own implementation.
+Overtone's idea is about sound generation. "Let me answer from the synthesis perspective - which is one of my main interests. Learning to design new synthesisers is a pretty dark art, and most of the books/resources I found take a very theory-centric stance which I found to not be particularly useful." Said the author of Overtone, Sam Aaron\cite{Aaron13}. The current design of ABCD is just let it compile to ABC, and let ABC deals with the sound generation part. The ultimate version of ABCD can be directly interpreted to play sound, so how Overtone hooks up with SuperCollider can be case-studied for our own implementation.
 
 Another advantage of overtone is about collaborative programming. Overtone provides an API for querying and fetching sounds from http://freesopund.org and a global concurrent event stream\cite{Aaron16}. Sharing music is a huge part of enable people to write music. ABC is a great source in text format to share music, and Overtone is a great source to share music in computer programs. However, to understand Overtone program is not as straight forward as reading ABC notation. ABCD will have programming feature, so we enable both sides --- for people who writes complicated music programs and for people who just write plain ABC with some syntactic sugar to make their life easier.
 
