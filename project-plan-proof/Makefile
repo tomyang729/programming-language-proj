@@ -4,7 +4,7 @@
 
 PACKAGE=acmart
 
-SAMPLES = project-background-report.tex
+SAMPLES = project-plan-proof.tex
 
 PDF = ${SAMPLES:%.tex=%.pdf}
 
@@ -31,7 +31,7 @@ all:  ${PDF}
 	while ( grep -q '^LaTeX Warning: Label(s) may have changed' $*.log) \
 	do pdflatex $<; done
 
-project-background-report.pdf: body.tex
+project-plan-proof.pdf: body.tex
 
 .PRECIOUS:  $(PACKAGE).cfg $(PACKAGE).cls
 
