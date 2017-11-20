@@ -1,0 +1,64 @@
+
+================================================
+Project Background Report
+Facilitator: Joanne
+Team IDs: y3f0b f4a0b y7x9a p7w9a
+TOTAL: 25/32
+
+
+
+Submission format is correct.
+Mark: 4/4
+Comments:
+
+
+
+Writing is professional (particularly: clear, concise, and easy to skim for key
+information).
+Mark: 2/4
+Comments:
+- quite a few typos and other writing errors
+- some paragraphs contain too many ideas so it's hard to tell the main point you're trying to get across
+
+
+
+Sources are cited appropriately throughout, both when quoted directly and when
+summarized or used as supporting evidence.
+Mark: 4/4
+Comments:
+
+
+
+Overview of project topic is clear.
+Mark: 3/4
+Comments:
+- overview section is clear but the report later on mentions a few features that 'may' be included - that's a little confusing
+
+
+
+Value/importance/impact of project topic is clear.
+Mark: 4/4
+Comments:
+
+
+
+Project topic is well-situated in its context (i.e., similar languages,
+analyses, or language features, depending on your topic).
+Mark: 2/4
+Comments:
+- discussions on similar languages aren't always relevant
+
+
+
+Novel technical aspects of the project topic are summarized using appropriate
+programming languages terminology.
+Mark: 2/4
+Comments:
+- need to think through additional things that will need to be implemented given the features you're introducing
+
+
+
+Potential project-the one you'd do for the 100% level-is described in the
+context of the project topic.
+Mark: 4/4
+Comments:
