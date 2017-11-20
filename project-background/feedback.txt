@@ -1,0 +1,74 @@
+TA's Feedback:
+
+2. Background and Significance
+[?] explain why is this a limitation
+[?] 'chords have semantic meanings' - ABC is a notation so I'm not sure what you mean by semantics
+[?] This section describes the lack of functionalities (i.e. unachievable things in ABC). Not being able to search is not a 'necessary' functionality and is more of an editor thing - its addition would provide convenience for the users but not new functionality. Put it somewhere else maybe?
+[?] Not sure what you mean by 'algorithms' in a musician's mind
+[?] example
+[?] elaborate
+[?] A bit confusing here. ABC is a notation, the musician can't 'perform operations' with ABC right? (Do you mean recording music ideas?)
+[O] note
+    Fixed: add a notes => add a note
+
+3. Similar Work
+[?] 1) The discussions on these languages seem a liiiittle irrelevant. Make sure to relate everything you talk about to your project. (e.g. why are you building a DSL for ABC instead of these other lanugages, what are some of the features you can take from these languages to put in ABCD and why, what are some features that you can't incorporate into ABCD and why)
+[?] 2) It sounds like these languages were designed for different purposes. E.g. it sounds like Overtone is more like a music library that a composer can use to create sounds. ABC, on the other hand, is purely notational (I think?), so when you're comparing ABC to other languages, make sure to talk about the differences with mentions of the different purposes
+[?] 3) 3) A lot of features are discussed (which is nice!) but most of these features aren't related to what you'll be adding to ABC. Perhaps talk more about the relevant features of these languages?
+
+3.1 Alda
+[O] abc
+  Fixed: abc => ABC
+
+3.2 Chuck
+[?] mini examples would make the points more clear. And again, make sure to relate these to ABCD/ABC
+[O] The Chuck?
+    Fixed: The Chuck => Chuck
+[?] built-in SDK? So will you also be providing libraries in ABCD?
+
+3.3 Overtone
+[?] ABC is a notation and ABCD is a DSL that outputs ABC - why compare ABC to a synthesizer??
+[?] is this gonna be done? (not in proposal)
+[?] again, purpose of Overtone is quite different
+[O] what's an automic?
+[?] will an object be considered a first class member?
+
+4. Potential Project
+[?] 1) Perhaps give an example of a tune/ABCD input that your final project would be able to compile to ABC?
+[?] 2) Should talk about type checking. Will it be needed given the features you're introducing? E.g. What happens if you're trying to iterate n times but n isn't a number?
+
+4.1 Features
+[?] This is a different discussion. Put it somewhere else and add a bit more?
+[?] Should decide on if first-class functions would be added
+[?] Not sure I understand this paragraph
+[?] think: note operations. How do you raise the key? Using '+'? or something else? Note operations should be supported if the  rationale for introducing loops is as said in this section
+[?] functional programming is a PL paradigm. If you meant 'fully functional' as in 'fully working', make sure to make that clear.
+
+4.3 Parse into AST
+[?] will you be modifying/extending an ABC parser? If so, state the reason (is it to parse ABCD?). if not, this section isn't really needed.
+
+4.4 Compiler
+[?] talk a little about scoping?
+[?] to what? Should explicitly state the output of the ABCD interpreter
+
+5. Limitations
+[?] explain the design decision to not allow recursion
+
+
+OVERALL
+[?]
+a few things to think about/add for proof of concept (that I can think of right now):
+
+- formal EBNF
+- parsing mechanisms
+- in-depth discussion on how you will implement the interpreter
+- how will you combine expanded ABC with original ABC
+- can you import multiple ABC files? if so, how will you combine them in the final ABC output?
+- evaluation strategy (eager? lazy?)
+- code snippets for (extended) parser and interpreter
+
+Writing/formatting problems:
+- Minor grammar mistakes
+- capitalization, e.g. abc, overtone
+- typos
+
