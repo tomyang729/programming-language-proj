@@ -30,24 +30,35 @@ Alda appears to satisfy most of the goals of ABCD. The only goal not addressed b
 
 \subsection{Chuck}
 
-	\subsubsection{What is it about?}
-
-	Chuck is a powerful programming language designed for real-time sound synthesis and music creation\cite{WangCook02}.  It has the following great features\cite{Wang08}:
+	\subsubsection{Features:}
+	Chuck is a powerful programming language designed for real-time sound synthesis and music creation\cite{WangCook02}. It is first released in 2003\cite{Wang15}. Since then, Chuck has evolved into a very robust and complete audio programming language. There are many language designs in Chuck that we can follow:
 	\begin{itemize}
-	\item Strongly-timed: Chuck allows programmers to control and reason about time precisely and expressively. It is an extremely important feature in audio programming paradigm.
-	\item Deterministic concurrency model: Chuck is able to run multiple processes (shreds) in parallel in its virtual machine. Combined with time-based model, it empowers end-user programmers to have arbitrarily fine granularity and create complex audio synthesis programs. 
-	\item Dynamic control rates: Programmers can manipulate the control rates (the manner with which a shred advances its way through time\cite{Wang08}) as they want and the control rates can dynamically vary with time.
-	\item Live-coding:  Chuck allows programmers to modify the code on the fly without recompiling.
+	\item Basic variables/ functions/ control structures: Just like any other programming languages, Chuck has primitive data types like int, float and reference data types like string, object, array. In ABCD, we will definitely support them (maybe exculding float and object for simplicity). ABCD will also have variables, functions and control structures like if-else and loops. This implies that we need environment to support static scoping and state to support mutation.
+	\item Strongly-timed: Chuck allows programmers to control and reason about time precisely and expressively. It is an extremely important feature in audio programming paradigm. Chuck achieved this feature by having 'time', 'dur'(duration), and 'now' data types that enable users to easily manipulate time for a score. Here is an example provided by its documentation:
+	\begin{verbatim}
+	// time + duration
+	now + 5::second => time later;
+
+	// time loop
+	while( now < later )
+	{
+    	// print out the time
+    	<<<now>>>;
+    	// advance time
+    	1::second => now;
+	}
+	<<<"success">>>;
+	\end{verbatim}
+	We will also create some time related data types in ABCD as well.
+	\item Deterministic concurrency model: Chuck is able to run multiple processes (shreds) in parallel in its virtual machine. Combined with time-based model, it empowers end-user programmers to have arbitrarily fine granularity and create complex audio synthesis programs. This could be a very cool feature to have in ABCD. However, the implementation of a concurrency model in our language is out of the scope of this course. So we won't include it in ABCD.
 	\end{itemize}
 
-	\subsubsection{What has it achieved?}
-		\paragraph{Language Design:}
-			Chuck is first released in 2003\cite{Wang15}. Since then, it has evolved into a very robust and complete audio programming language. It is static typing. Besides, the designer of Chuck has includes most of the modern language features in this languages. For example, it has primitive types such as int, float, void etc, reference types, variables, arrays, functions, control structures, and even object oriented features. Furthermore, since Chuck is a programming language specialized in music, it contains many special designs such as `time` and `dur` type for users to easily manipulate time, `unit generator` and `unit analyzer` functions that are convenient to modify big chunk of music.
-		\paragraph{Applications:}
-			Chuck has found a variety of applications in music research and music creation. First of all, it is able to turn computers into instruments. Chuck has powered two "computer music" orchestras, namely PLOrk (Princeton Laptop Orchesta) and SLOrk (Stanford Laptop Orchestra). Besides, Chuck has served as experimental platformfor on-the-fly machine learning for real-time musicinformation retrieval prototyping\cite{Wang15}. In addition, it has also been applied in the development of music mobile-apps like Ocarina and Smule\cite{Wang15}.
-	\subsubsection{How our language is different?}
-	
-		The success of Chuck demonstrates the significance of the role of programming language plays in music and audio produciton. Designing and applying programming lanuages in generating and modifying music is definitely a valuable task to do. And Chuck is a great example we can learn from when designing our own Domain Specific Language which is customized for ABC music notation. There are many language designs in Chuck that we can follow. For instance, we should definitely include primitive types such as int, float, and music specific types like duration, note etc. Moreover, having functions and common control structures like conditional statements and loops will also be helpful. With that being said, we will not copy all the features from Chuck into ABCD. What we will do differently is that ABCD will contain ABC related data types to natively support ABC notations. Besides, we will also provide build-in SDK to systematically modify ABC files. 
+	\subsubsection{Applications:}
+	Designing and applying a programming lanuage in generating and modifying music is a valuable task to do. The success of Chuck has perfectly demonstrated this point. Chuck has found a variety of applications in music research and music creation. For example, Chuck powers two "computer music" orchestras at Princeton university and Stanford University. Besides, Chuck has served as experimental platform for on-the-fly machine learning and for real-time music information retrieval prototyping\cite{Wang15}. In addition, it has also been applied in the development of music mobile-apps like Ocarina and Smule\cite{Wang15}. 
+
+	\subsubsection{ABCD vs Chuck:}
+	ABCD can be think of a much simplified version of Chuck, but it is customized for ABC music notation. Like Chuck, ABCD will include primitive types such as int, float, void etc. We will also support functions and common control structures like conditional statements and loops in ABCD. Moreover, having music-programming specific features will also be helpful. Those features could be including 'time' and 'duration' types, or natively supporting 'note' and 'speed' data types.
+	 
 
 \subsection{Overtone}
 
@@ -94,7 +105,7 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 	Another example is to generate a sequence of semi-tone of length 30. Instead of manually typing 30 notes, one can simply use loop to generate a scale by increasing the key by half in each iteration.
 
 	\subsubsection{Conditions:}
-		The conditional statment is an extremely powerful and important portion of a fully functional programming language. It enables the programmers to test a variable against a value and execute in one way or another. Thus, ABCD will include if-else statement in order to help end-users control the dynamic execution flow of their programs. Syntatically, we will follow the standard conditional statement syntax and its semantics. Namely, a 'if' key word followed by a condition statement, followed by a truth statement and an optional 'else' key word and a falsity statement. The programmers can also chain conditional statements by using the 'if else' key word.
+		The conditional statment is an extremely powerful and important portion of a fully working programming language. It enables the programmers to test a variable against a value and execute in one way or another. Thus, ABCD will include if-else statement in order to help end-users control the dynamic execution flow of the programs. Syntatically, we will follow the standard conditional statement syntax and its semantics. Namely, a 'if' key word is followed by a condition statement, which is followed by a truth statement and an optional 'else' key word and a falsity statement. The programmers can also chain conditional statements by using the 'if else' key word.
 
 		As an example, a user may want to change the speed of a score, but only if the tone is D. A conditional statment will be handy here.
 	\subsubsection{File Importing:}
