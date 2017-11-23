@@ -113,41 +113,40 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 
 We will design concrete syntax for ABCD to support the following features: variables, conditionals, functions, loops, and import statements.
 
-We basically adopt Racket's syntax to declare variables:
+\begin{itemize}
+\item To declare variables:
 \begin{verbatim}
 (define bar1 (| C D E F |))
 (define bar2 (| G A B C |))
 \end{verbatim}
 
-To declare conditionals:
+\item To declare conditionals:
 \begin{verbatim}
 (if (= key C)
     (up key 1)
     key)
 \end{verbatim}
 
-To declare functions (and comments):
+\item To declare functions (and comments):
 \begin{verbatim}
 # make each note go up by 2 level, e.g., | C D E F | => | E F G A |
 (define (trans bar)
         (map (lambda (note) (up note 2)) bar))
 \end{verbatim}
 
-For import statments:
+\item For import statments:
 \begin{verbatim}
 import an_unknown_song.abc as tune
 \end{verbatim}
-
+\end{itemize}
 
 \subsection{Parse into AST}
 
 After researching online, we have found a few implmentations of ABC parser in different languages. We list them below and discuss their strengths and weaknesses. By learning lessons from them, we can make fewer mistakes in designing and implmenting our own ABCD parser.
 
-Sergi Mansilla has implemented an ABC parser in JavaScript(ECMA-262, 5th ed.), which parses ABC notations to JSON objects\cite{Mansilla12}. Mansilla's implmentation seems to be the easiest one to comprehend and can be adopted effortlessly since JSON is a widely used data transfer format. The parser is based on PEG.js(parsing expression grammar), a simple parser generator for JavaScript that produces fast parsers with error reporting\cite{Ryuu17}. It integrates both lexical and syntactical analysis. The parsing expression grammar formalism is described to be more powerful than traditional LL(k) and LR(k) parsers. 
+Sergi Mansilla has implemented an ABC parser in JavaScript(ECMA-262, 5th ed.), which parses ABC notations to JSON objects\cite{Mansilla12}. Mansilla's implmentation seems to be the easiest one to comprehend and can be adopted effortlessly since JSON is a widely used data transfer format. The parser is based on PEG.js(parsing expression grammar), a simple parser generator for JavaScript that produces fast parsers with error reporting\cite{Ryuu17}. It integrates both lexical and syntactical analysis. The parsing expression grammar formalism is described to be more powerful than traditional LL(k) and LR(k) parsers.
 
 Hans H\"{o}glund has implemented a parser in Haskell\cite{Hoglund15} with a BSD license. H\"{o}glund's implmentation is short and elegant but has a few limitations, such as do not support volatile features, text strings, and macros.
-
-In order to build a prototype, we think of a simple implementation in Python that only parses a subset of ABC notation(bars, title, etc.), because Python is good for its string manipulation capabilitites. In our full project, we plan to use a parser generator to completetly contain the whole ABC language specification. 
 
 For example, consider the following ABCD program.
 \begin{verbatim}
@@ -202,12 +201,9 @@ We will parse it to an AST like this:
         ...,
         [{ note: "f'",
            length: 1},
-         { note: "g'",
-           length: 1},
-         { note: "a'",
-           length: 1},
+         ...,
          { note: "b'",
-           length: 1}],
+           length: 1}]
     ]
 }
 \end{verbatim}
