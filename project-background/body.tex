@@ -157,7 +157,7 @@ Sergi Mansilla has implemented an ABC parser in JavaScript(ECMA-262, 5th ed.), w
 
 Hans H\"{o}glund has implemented a parser in Haskell\cite{Hoglund15} with a BSD license. H\"{o}glund's implmentation is short and elegant but has a few limitations, such as do not support volatile features, text strings, and macros.
 
-For example, consider the following ABCD program.
+We plan to use Python to implement our own ABCD parser, adopting some parsing techniques and ideas about AST structure from Mansilla and H\"{o}glund. The whole ABCD program will be parsed into a JSON object. For example, consider the following ABCD program:
 \begin{verbatim}
 X:1
 T:Notes
