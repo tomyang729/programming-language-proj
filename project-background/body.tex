@@ -22,9 +22,14 @@ ABC is not the only computer language for music production. Other people have al
 
 \subsection{Alda}
 
-Alda is a music programming language intended for live-coding and composing music using only a text editor. It has similar music code syntax to ABC, with a goal of being understandable and usable by musicians with no programming experience\cite{Yarwood15}. Alda supports inline Clojure, a dialect of lisp\cite{Hickey17}, giving it rich programming capabilities. It can be exported to MIDI\cite{Yarwood15_2}, which can in turn be used to generate sheet music using software like MuseScore\cite{MuseScore17}. 
+Alda is a music programming language intended for live-coding and composing music using only a text editor. It has similar music code syntax to ABC, with a goal of being understandable and usable by musicians with no programming experience\cite{Yarwood15}. 
 
-Alda appears to satisfy most of the goals of ABCD. The only goal not addressed by Alda is ABC interoperability (through either translation or inline use). Considering the significant size of the ABC corpus and the large amount of software designed to work with ABC, we believe it will be valuable to enable native programmatic modification and generation of ABC through the ABCD domain specific language. As an alternative, Alda could be extended with features to import and export ABC, but this will require ABC users who want programming capabilities to learn a brand new language and use a longer pipeline, at least for modification (import ABC file to Alda, modify it, and export to ABC).
+Alda ships with a read-evaluate-print loop for playing the music described in Alda code. This arguably a more native support than ABC's use of third-party software to play an ABC tune out loud. ABC on the other hand has more straightforward support for printing sheet music as a PDF, as there are software programs explicitly for this purpose. To produce sheet music from Alda code, the code must be exported to MIDI\cite{Yarwood15_2}, which can in turn be used to generate sheet music using software like MuseScore\cite{MuseScore17}. 
+
+
+Alda supports inline Clojure, a dialect of lisp\cite{Hickey17}, giving it rich programming capabilities. This includes all features planned for ABCD: variables, functions, loops, conditions, inclusion of library files, and file reading and writing. Clojure "is predominantly a functional programming language"[9], but also supports mutation. In contrast, we intend ABCD to be imperative in style and use mutation heavily, as discussed in section 4.1.
+
+Alda satisfies most of the goals of ABCD. The only goal not addressed by Alda is ABC interoperability (through either translation or inline use). Considering the significant size of the ABC corpus and the large amount of software designed to work with ABC, we believe it will be valuable to enable native programmatic modification and generation of ABC through the ABCD domain specific language. As an alternative, Alda could be extended with features to import and export ABC, but this will require ABC users who want programming capabilities to learn a brand new language and use a longer pipeline, at least for modification (import ABC file to Alda, modify it, and export to ABC).
 
 \subsection{Chuck}
 
@@ -71,7 +76,7 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 
 \section{Potential Project}
 
-\subsection{Imperative style}
+\subsection{Imperative Style}
     ABC encodes a music score, which represents a sequence of notes to be played over time, and it is encoded for the most part in the same order as the notes. We are aiming for ABCD to be used to apply sequential transformations to modify existing ABC files or pieces of ABC music code within an ABCD file. The imperative programming style lends itself to applying a sequence of transformations to variables. The sequential, time-driven nature of imperative programming can be viewed as analagous to the progression of notes in a piece of music. The shared sequentiality of imperative programming and music scores should make it easy to reason about transformations of variables and expansions of ABCD expressions interwoven with ABC music notation.
 
 \subsection{Features}
