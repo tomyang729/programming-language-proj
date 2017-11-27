@@ -37,7 +37,7 @@ Alda satisfies most of the goals of ABCD. The only goal not addressed by Alda is
     Chuck is a powerful programming language designed for real-time sound synthesis and music creation\cite{WangCook02}. It is first released in 2003\cite{Wang15}. Since then, Chuck has evolved into a very robust and complete audio programming language. There are many language designs in Chuck that we can follow:
     \begin{itemize}
     \item Basic variables/ functions/ control structures: Just like any other programming languages, Chuck has primitive data types like int, float and reference data types like string, object, array. In ABCD, we will definitely support them (maybe exculding float and object for simplicity). ABCD will also have variables, functions and control structures like if-else and loops. This implies that we need environment to support static scoping and state to support mutation.
-    \item Strongly-timed: Chuck allows programmers to control and reason about time precisely and expressively. It is an extremely important feature in audio programming paradigm. Chuck achieved this feature by having "time", "dur"(duration), and "now" data types that enable users to easily manipulate time for a score. Here is an example provided by its documentation:
+    \item Strongly-timed: Chuck allows programmers to control and reason about time precisely and expressively. It is an extremely important feature in audio programming paradigm. Chuck achieved this feature by having "time", "dur"(duration), and "now" data types that enable users to easily manipulate time for a score. Here is an example provided by its documentation\cite{Wang15}:
     \begin{verbatim}
     // time + duration
     now + 5::second => time later;
@@ -53,26 +53,24 @@ Alda satisfies most of the goals of ABCD. The only goal not addressed by Alda is
     <<<"success">>>;
     \end{verbatim}
     We will also create some time related data types in ABCD as well.
-    \item Deterministic concurrency model: Chuck is able to run multiple processes (shreds) in parallel in its virtual machine. Combined with time-based model, it empowers end-user programmers to have arbitrarily fine granularity and create complex audio synthesis programs. This could be a very cool feature to have in ABCD. However, the implementation of a concurrency model in our language is out of the scope of this course. So we won't include it in ABCD.
+    \item Deterministic concurrency model: Chuck is able to run multiple processes (shreds) in parallel in its virtual machine\cite{Wang15}. Combined with time-based model, it empowers end-user programmers to have arbitrarily fine granularity and create complex audio synthesis programs. This could be a very cool feature to have in ABCD. However, the implementation of a concurrency model in our language is out of the scope of this course. So we won't include it in ABCD.
     \end{itemize}
 
     \subsubsection{Applications:}
     Designing and applying a programming lanuage in generating and modifying music is a valuable task to do. The success of Chuck has perfectly demonstrated this point. Chuck has found a variety of applications in music research and music creation. For example, Chuck powers two "computer music" orchestras at Princeton university and Stanford University. Besides, Chuck has served as experimental platform for on-the-fly machine learning and for real-time music information retrieval prototyping\cite{Wang15}. In addition, it has also been applied in the development of music mobile-apps like Ocarina and Smule\cite{Wang15}. 
 
     \subsubsection{ABCD vs Chuck:}
-    ABCD can be think of a much simplified version of Chuck, but it is customized for ABC music notation. Like Chuck, ABCD will include primitive types such as int, float, void etc. We will also support functions and common control structures like conditional statements and loops in ABCD. Moreover, having music-programming specific features will also be helpful. Those features could be including "time" and "duration" types, or natively supporting "note" and "speed" data types.
+    ABCD can be thought of a much simplified version of Chuck, but it is customized for ABC music notation. Like Chuck, ABCD will include primitive types such as int, float, void etc. We will also support functions and common control structures like conditional statements and loops in ABCD. Moreover, having music-programming specific features will also be helpful. Those features could be including "time" and "duration" types, or natively supporting "note" and "speed" data types.
      
 
 \subsection{Overtone}
 
-Overtone is an Open Source toolkit for designing synthesizers and collaborating with music. It provides\cite{Aaron16}:
+Overtone is an open-source toolkit for designing synthesizers and collaborating with music. It provides\cite{Aaron16}:
 \begin{itemize}
-\item A Clojure API to the SuperCollider synthesis engine. The current aim of ABCD is to compile to ABC. However, in the future, we hope that ABCD can be directly interpreted. So musicians do not need to compile ABCD into ABC, then use a software to play the music. Enabling direct interpretation improves musician's speed of writing music.
-\item A growing library of musical functions (scales, chords, rhythms, arpeggiators, etc.). ABCD also needs to provide a rich library of music manipulation patterns such as "fugue" in "Toccata and Fugue in D minor". Although library is not a "core" part of the programming language, it will be super useful to musicians. One reason for Java and Python being popular, is that they have rich library that really easies developer's life.
+\item A Clojure API to the SuperCollider synthesis engine. The current design is that we make ABCD compile to ABC, then we use existing ABC software to play music. However, in the future, we hope that ABCD can be directly interpreted. So musicians do not need to compile ABCD into ABC, then use a software to play the music. Enabling direct interpretation improves musician's speed of writing music.
+\item A growing library of musical functions (scales, chords, rhythms, arpeggiators, etc.). ABCD also needs to provide a rich library of music manipulation functions such as "fugue" in "Toccata and Fugue in D minor". Although library is not a "core" part of the programming language, it will be super useful to musicians. One reason for Java and Python being popular, is that they have rich library that really easies developer's life.
 \item Collaborative programming. Overtone provides an API for querying and fetching sounds from \url{http://freesopund.org} and a global concurrent event stream\cite{Aaron16}. Sharing music is a huge part of enable people to write music. ABC is a great source in text format to share music, and Overtone is a great source to share music in computer programs. However, understanding Overtone programs is not as straightforward as reading ABC notation. ABCD enables both sides --- for people who writes complicated music programs and for people who just write plain ABC with some syntactic sugar to make their life easier.
 \end{itemize}
-
-From a language design perspective, Overtones design is based on Clojure. Two core component of Overtone are synths and ugens. Synths are trees of ugens. Ugens are standard Clojure functions and return data structures which are understood by the macros demo and defsynth. You can pass arguments to the ugen functions to specify their behaviour. Synths are not ugens. Calling a ugen function returns a data structure which can be used in a synth design. Calling a synth as a function triggers (i.e. plays) that synth.\cite{Aaron14} The story of Overtone gives us some hints on the language design --- we probably need to define what are first-class of our language. For instance, a sequence of sounds is probably a playable/translatable object (high level data structure). While a single note "C" is a basic type of our language.
 
 \section{Potential Project}
 
@@ -81,7 +79,7 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 
 \subsection{Features}
     \subsubsection{Variables:}
-    Most programming languages have some form of identifiers. ABCD will as well -- this allows us to easily refer to functions and values. In the case of ABCD, this may include small and large chunks of music code. ABCD will support variables rather than immutable values. Variables lend themselves to modifying existing music code, which is one of our use case goals for ABCD. They also provide a mechanism for applying repeated transformations to a piece of music code that may or may not occur contiguously in the file (and therefore in evaluation). Mutation using variables is a feature supported in most popular programming languages. Moreover, ABC encodes a music score, which represents a sequence of notes to be played over time, and it is encoded for the most part in the same order as the notes. Similarly, mutation is driven by the flow of time. 
+    Most programming languages have some form of identifiers. ABCD will as well -- this allows us to easily refer to functions and values. In the case of ABCD, this may include small and large chunks of music code. ABCD will support variables rather than immutable values. Variables lend themselves to modifying existing music code, which is one of our use case goals for ABCD. They also provide a mechanism for applying repeated transformations to a piece of music code that may or may not occur contiguously in the file (and therefore in evaluation). Mutation using variables is a feature supported in most popular programming languages. Moreover, ABC encodes a music score, which represents a sequence of notes to be played over time, and it is encoded for the most part in the same order as the notes. Similarly, mutation is driven by the flow of execution. 
     
     \subsubsection{Functions:}
     Functions are a basic component of a programming language for performing a specific task. ABCD would support users to write functions such as (but not limited to) the following:
@@ -120,7 +118,7 @@ From a language design perspective, Overtones design is based on Clojure. Two co
 
 \subsection{Concrete Syntax}
 
-We will design concrete syntax for ABCD to support the following features: variables, conditionals, functions, loops, and import statements.
+We will design concrete syntax for ABCD to support the following features: variables, conditionals, functions, loops, and import statements. Below are some examples of our concrete syntax:
 
 \begin{itemize}
 \item To declare variables:
@@ -138,7 +136,8 @@ We will design concrete syntax for ABCD to support the following features: varia
 
 \item To declare functions (and comments):
 \begin{verbatim}
-# make each note go up by 2 level, e.g., | C D E F | => | E F G A |
+# make each note go up by 2 level, 
+# e.g. | C D E F | => | E F G A |
 (define (trans bar)
         (map (lambda (note) (up note 2)) bar))
 \end{verbatim}
@@ -168,9 +167,10 @@ K:C
 (define bar1 (| C D E F |))
 (define bar2 (| G A B C |))
 
-# make each note go up by 2 level, e.g., | C D E F | => | E F G A |
+# make each note go up by 2 level,
+# e.g., | C D E F | => | E F G A |
 (define (trans bar)
-        (map (lambda (note) (up note 2)) bar))
+    (map (lambda (note) (up note 2)) bar))
 
 | bar1         | bar2      | D E F G    |
 | (trans bar1) | b c' d' e'| f' g' a' b'|]
@@ -179,41 +179,41 @@ K:C
 We will parse it to an AST like this:
 \begin{verbatim}
 {
-    environment : {
-        header : {
-            id : 1,
-            title : "Notes",
-            meter : "C",
-            length : "1/4",
-            key : "C"
-        }
-        bindings : {
-            variables : {
-                bar1 : | C D E F |,
-                bar2 : | G A B C |
-            }
-
-            functions : {
-                trans : {
-                    param : bar,
-                    expr : (map (lambda (note) (up note 2)) bar)
-                }
-            }
-        }
+  environment : {
+    header : {
+      id : 1,
+      title : "Notes",
+      meter : "C",
+      length : "1/4",
+      key : "C"
     }
+    bindings : {
+      variables : {
+        bar1 : | C D E F |,
+        bar2 : | G A B C |
+      }
 
-    tune: [
-        bar1,
-        bar2,
-        ...,
-        (trans bar1),
-        ...,
-        [{ note: "f'",
-           length: 1},
-         ...,
-         { note: "b'",
-           length: 1}]
-    ]
+      functions : {
+        trans : {
+          param : bar,
+          expr : (map (lambda (note) (up note 2)) bar)
+        }
+      }
+    }
+  }
+
+  tune: [
+    bar1,
+    bar2,
+    ...,
+    (trans bar1),
+    ...,
+    [{ note: "f'",
+       length: 1},
+     ...,
+     { note: "b'",
+       length: 1}]
+  ]
 }
 \end{verbatim}
 
