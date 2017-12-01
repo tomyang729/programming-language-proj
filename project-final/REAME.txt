@@ -1,0 +1,10 @@
+Re-Resubmission of Project Background Research Report
+
+Based on the feedback of resubmission, we made the following changes:
+
+- Add inline citations in Chuck part.
+- Fix typos and grammar mistakes.
+- Remove unrelated discussions in Overtone part.
+- Explicitly state "these are examples" in Concrete Syntax part.
+- Fix code formatting issues.
+
