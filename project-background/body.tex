@@ -65,13 +65,10 @@ Alda satisfies most of the goals of ABCD. The only goal not addressed by Alda is
 
 \subsection{Overtone}
 
-Overtone is an open-source toolkit for designing synthesizers and collaborating with music.
+Overtone is an open-source toolkit for designing synthesizers and collaborating with music. It provides a Clojure API to the SuperCollider synthesis engine\cite{Aaron16}, which means musicians can directly "play" Overtone code. Directly interpreting code to music is a nice feature for ABCD to have. Even though the current plan for ABCD is to make it compile to ABC, we hope to incrementatlly build ABCD so it can be directly interpreted in the future. This will increase musicians' productivity a lot.
 
-Overtone provides a Clojure API to the SuperCollider synthesis engine\cite{Aaron16}. The current design is that we make ABCD compile to ABC, then we use existing ABC software to play music. However, in the future, we hope that ABCD can be directly interpreted. So musicians do not need to compile ABCD into ABC, then use a software to play the music. Enabling direct interpretation improves musician's speed of writing music.
+Overtone has a growing library of musical functions (scales, chords, rhythms, arpeggiators, etc.). As a musical programming language, ABCD also needs to provide a rich library of musical functions, although library is not a "core" part of the programming language. Users of ABCD would expect many useful libraries functions to help them write music faster.
 
-Overtone has a growing library of musical functions (scales, chords, rhythms, arpeggiators, etc.). ABCD also needs to provide a rich library of music manipulation functions such as "fugue" in "Toccata and Fugue in D minor". Although library is not a "core" part of the programming language, it will be super useful to musicians. One reason for Java and Python being popular, is that they have rich library that really easies developer's life.
-
-Overtone enables collaborative programming. Overtone provides an API for querying and fetching sounds from \url{http://freesopund.org} and a global concurrent event stream\cite{Aaron16}. Sharing music is a huge part of enable people to write music. ABC is a great source in text format to share music, and Overtone is a great source to share music in computer programs. However, understanding Overtone programs is not as straightforward as reading ABC notation. ABCD enables both sides --- for people who writes complicated music programs and for people who just write plain ABC with some syntactic sugar to make their life easier.
 
 \section{Potential Project}
 
